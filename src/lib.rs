@@ -3,7 +3,6 @@ use hex::{decode, encode};
 pub fn decode_hex(hex_str: &str) -> Result<Vec<u8>, String> {
     // TODO: Decode hex string into Vec<u8>, return error string on failure
     decode(hex_str).map_err(|e| e.to_string())
-
 }
 
 pub fn to_big_endian(bytes: &[u8]) -> Vec<u8> {
@@ -28,7 +27,9 @@ pub fn swap_endian_u32(num: u32) -> [u8; 4] {
 
 pub fn parse_satoshis(input: &str) -> Result<u64, String> {
     // TODO: Parse input string to u64, return error string if invalid
-    input.parse::<u64>().map_err(|_| "Invalid satoshi amount".to_string())
+    input
+        .parse::<u64>()
+        .map_err(|_| "Invalid satoshi amount".to_string())
 }
 
 pub enum ScriptType {
@@ -53,7 +54,7 @@ pub struct Outpoint(pub String, pub u32);
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
     // TODO: Return the pushdata portion of the script slice (assumes pushdata starts at index 2)
-        &script[2..]
+    &script[2..]
 }
 
 pub trait Wallet {
@@ -111,5 +112,4 @@ pub struct UTXO {
 pub fn consume_utxo(utxo: UTXO) -> UTXO {
     // TODO: Implement UTXO consumption logic (if any)
     utxo
-    
 }
